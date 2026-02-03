@@ -2,35 +2,106 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Valentine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #fce4ec; font-family: 'Poppins', sans-serif; }
-        
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fce4ec;
+            overflow: hidden;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .question-container {
+            text-align: center;
+            transition: 0.2s;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .local-gif {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto 2rem auto;
+            pointer-events: none;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #d81b60;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            height: 60px; /* Espace pour les boutons */
+        }
+
+        .btn {
+            border: none;
+            border-radius: 50px;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #ff54a4;
+            color: white;
+            box-shadow: 0px 4px 15px rgba(255, 107, 129, 0.5);
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.2);
+            background-color: #ff2e91;
+        }
+
+        #no-btn {
+            position: absolute; /* Crucial pour qu'il puisse bouger partout */
+        }
     </style>
 </head>
 <body>
 
-<div class="question-container">
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" class="local-gif">
-    <h1 class="question">Veux tu être ma Valentine ?</h1>
-    <div class="button-container">
-        <button class="btn">Oui !</button>
-        <button class="btn" style="background-color: #999;">Non</button>
-    </div>
-</div>
-
-</body>
-    <script>
-    const noBtn = document.querySelector('#no-btn'); // On sélectionne ton bouton Non
-
-    noBtn.addEventListener('mouseover', () => {
-        // On calcule des positions aléatoires
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    <div class="question-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" class="local-gif">
         
-        // On déplace le bouton
-        noBtn.style.position = 'absolute';
-        noBtn.style.left = x + 'px';
-        noBtn.style.top = y + 'px';
-    });
-</script>
+        <h1 class="question">Veux-tu être ma Valentine ?</h1>
+        
+        <div class="button-container">
+            <button class="btn" id="yes-btn" onclick="celebrate()">Oui !</button>
+            <button class="btn" id="no-btn">Non</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.querySelector('#no-btn');
+        const yesBtn = document.querySelector('#yes-btn');
+
+        // Faire fuir le bouton "Non"
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // Action quand on clique sur "Oui"
+        function celebrate() {
+            alert("YEAH ! ❤️ On se voit quand ?");
+            // Tu peux aussi rediriger vers une autre page ou changer le GIF
+            document.querySelector('.question').innerHTML = "C'est promis ! ❤️";
+            document.querySelector('.local-gif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lH4ADRtAYnGsLe/giphy.gif";
+        }
+    </script>
+</body>
 </html>
