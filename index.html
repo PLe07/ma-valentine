@@ -11,7 +11,7 @@
 
 <div class="question-container">
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" class="local-gif">
-    <h1 class="question">On sort ensemble ?</h1>
+    <h1 class="question">Veux tu être ma Valentine ?</h1>
     <div class="button-container">
         <button class="btn">Oui !</button>
         <button class="btn" style="background-color: #999;">Non</button>
@@ -19,4 +19,18 @@
 </div>
 
 </body>
+    <script>
+    const noBtn = document.querySelector('#no-btn'); // On sélectionne ton bouton Non
+
+    noBtn.addEventListener('mouseover', () => {
+        // On calcule des positions aléatoires
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        
+        // On déplace le bouton
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    });
+</script>
 </html>
