@@ -3,105 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma Valentine</title>
+    <title>Ma Valentine 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
     <style>
         body {
             margin: 0;
             height: 100vh;
-            display: flex;
+            display: flex; /* Centre tout verticalement et horizontalement */
             justify-content: center;
             align-items: center;
-            background-color: #fce4ec;
-            overflow: hidden;
-            font-family: "Poppins", sans-serif;
+            background-color: #ffe4e1; /* Rose très doux */
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; /* Empêche le scroll si le bouton sort de l'écran */
         }
 
-        .question-container {
+        .container {
             text-align: center;
-            transition: 0.2s;
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
             width: 90%;
-            max-width: 500px;
         }
 
         .local-gif {
             width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto 2rem auto;
-            pointer-events: none;
+            max-width: 250px;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
         }
 
-        .question {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+        h1 {
             color: #d81b60;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
         }
 
-        .button-container {
+        .btn-group {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            height: 60px; /* Espace pour les boutons */
+            gap: 20px;
+            position: relative;
+            min-height: 50px;
         }
 
         .btn {
+            padding: 12px 25px;
             border: none;
             border-radius: 50px;
-            padding: 14px 28px;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #ff54a4;
-            color: white;
-            box-shadow: 0px 4px 15px rgba(255, 107, 129, 0.5);
+            transition: 0.3s;
         }
 
-        #yes-btn:hover {
-            transform: scale(1.2);
-            background-color: #ff2e91;
+        #yes-btn {
+            background-color: #ff54a4;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 84, 164, 0.4);
         }
 
         #no-btn {
-            position: absolute; /* Crucial pour qu'il puisse bouger partout */
+            background-color: #a0a0a0;
+            color: white;
+            position: absolute; /* Permet au JS de le déplacer n'importe où */
+            left: 55%; /* Position initiale */
         }
     </style>
 </head>
 <body>
 
-    <div class="question-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" class="local-gif">
+    <div class="container" id="main-card">
+        <img id="display-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" class="local-gif">
+        <h1 id="question-text">Veux-tu être ma Valentine ?</h1>
         
-        <h1 class="question">Veux-tu être ma Valentine ?</h1>
-        
-        <div class="button-container">
-            <button class="btn" id="yes-btn" onclick="celebrate()">Oui !</button>
+        <div class="btn-group">
+            <button class="btn" id="yes-btn">Oui !</button>
             <button class="btn" id="no-btn">Non</button>
         </div>
     </div>
 
     <script>
-        const noBtn = document.querySelector('#no-btn');
-        const yesBtn = document.querySelector('#yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const gif = document.getElementById('display-gif');
+        const question = document.getElementById('question-text');
 
-        // Faire fuir le bouton "Non"
+        // LE BOUTON QUI FUIT
         noBtn.addEventListener('mouseover', () => {
+            // Calcule une position aléatoire sur l'écran
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            noBtn.style.position = 'fixed'; // Passe en fixe pour bouger partout
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
         });
 
-        // Action quand on clique sur "Oui"
-        function celebrate() {
-            alert("YEAH ! ❤️ On se voit quand ?");
-            // Tu peux aussi rediriger vers une autre page ou changer le GIF
-            document.querySelector('.question').innerHTML = "C'est promis ! ❤️";
-            document.querySelector('.local-gif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lH4ADRtAYnGsLe/giphy.gif";
-        }
+        // L'INTERACTION RÉUSSIE (Page suivante simulée)
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "YEAH ! ❤️ On se voit quand ?";
+            gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1uNXp5Y3V3eHByZ3RreXp3eHByZ3RreXp3eHByZ3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lH4ADRtAYnGsLe/giphy.gif";
+            noBtn.style.display = 'none'; // Cache le bouton "Non"
+            yesBtn.style.transform = "scale(1.5)";
+        });
     </script>
 </body>
 </html>
